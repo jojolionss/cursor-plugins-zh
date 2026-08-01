@@ -1,0 +1,26 @@
+{
+  "skills/thermos/SKILL.md": {
+    "en": "Launch both thermo-nuclear review subagents in parallel, then synthesize their findings. Use for thermos, double thermo review, or combined bug/security and code-quality branch audits.",
+    "zh": "并行启动两个 thermo-nuclear 评审子代理,再综合两者的发现。当用户说 thermos、double thermo review,或要做 bug/安全与代码质量合并的分支审计时使用。"
+  },
+  "skills/thermo-nuclear-review/SKILL.md": {
+    "en": "Comprehensive security and correctness audit of a branch's changes. Use for thermo nuclear, thermonuclear, or deep review requests, or branch/PR diff audits focused on bugs, breaking changes, security issues, devex regressions, and feature-gate leaks.",
+    "zh": "对分支变更做全面的安全与正确性审计。当用户说 thermo nuclear、thermonuclear、deep review,或要对分支/PR diff 做聚焦于 bug、破坏性变更、安全问题、开发体验回退、feature-gate 泄漏的审计时使用。"
+  },
+  "skills/thermo-nuclear-code-quality-review/SKILL.md": {
+    "en": "Run an extremely strict maintainability review for abstraction quality, giant files, and spaghetti-condition growth. Use for a thermo-nuclear code quality review, thermonuclear review, deep code quality audit, or especially harsh maintainability review.",
+    "zh": "针对抽象质量、巨型文件、意大利面条式条件增殖,运行一场极其严格的可维护性评审。当用户要求 thermo-nuclear code quality review、thermonuclear review、深度代码质量审计、或特别严苛的可维护性评审时使用。"
+  },
+  "agents/thermo-nuclear-review-subagent.md": {
+    "en": "Thermo-nuclear branch audit (bugs, breaking changes, security, devex, feature-flag leaks) scoped to the diff. Invoked via Task after a parent gathers diff and file contents. Loads rubric from the thermo-nuclear-review skill in the Thermos plugin.",
+    "zh": "Thermo-nuclear 分支审计(bug、破坏性变更、安全、开发体验、feature-flag 泄漏),范围限定在 diff 内。由父代理收集完 diff 与文件内容后经 Task 调用。评审标准加载自 Thermos 插件中的 thermo-nuclear-review 技能。"
+  },
+  "agents/thermo-nuclear-code-quality-review-subagent.md": {
+    "en": "Thermo-nuclear code quality audit (maintainability, structure, 1k-line rule, spaghetti, code-judo). Invoked via Task after a parent gathers diff and file contents. Loads rubric from the thermo-nuclear-code-quality-review skill in the Thermos plugin.",
+    "zh": "Thermo-nuclear 代码质量审计(可维护性、结构、千行文件规则、意大利面条代码、code-judo)。由父代理收集完 diff 与文件内容后经 Task 调用。评审标准加载自 Thermos 插件中的 thermo-nuclear-code-quality-review 技能。"
+  },
+  ".cursor-plugin/plugin.json": {
+    "en": "Thermo-nuclear branch review: deep correctness and security audits plus harsh code-quality rubrics, parallel subagents, thermos orchestration, and optional take-the-wheel and FSD merge-ready flows.",
+    "zh": "Thermo-nuclear 分支评审:深度的正确性与安全审计,加上严苛的代码质量评分标准、并行子代理、thermos 编排,以及可选的 take-the-wheel 与 FSD merge-ready 流程。"
+  }
+}
