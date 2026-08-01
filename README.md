@@ -12,9 +12,10 @@
 ## 安装
 
 1. 在 Cursor 的插件管理里卸载或停用商店版的 pstack 和 thermos。不卸载的话,每个技能会出现英文、中文两份。
-2. 用插件面板的本地安装入口,选中仓库根目录 `~/cursor-plugins-zh`(不是 `plugins/` 子目录)。Cursor 要求所选文件夹带有 `.cursor-plugin/marketplace.json`,本仓库根目录已按上游同款格式配好,里面挂了 pstack 和 thermos 两个插件。
-3. 在弹出的列表里安装这两个插件。
-4. 重新打开聊天输入框的技能选择器,悬浮介绍应显示为中文。
+2. 确认本仓库至少有一次 git commit(`git rev-parse HEAD` 能打出 SHA)。Cursor 加载本地 marketplace 时会解析 `plugin@HEAD`;仓库还没有 commit 时会报 `Failed to resolve version for plugin *@HEAD`,界面显示「加载插件错误」,并可能拖慢插件重载。
+3. 用插件面板的本地安装入口,选中仓库根目录 `~/cursor-plugins-zh`(不是 `plugins/` 子目录)。Cursor 要求所选文件夹带有 `.cursor-plugin/marketplace.json`,本仓库根目录已按上游同款格式配好,里面挂了 pstack 和 thermos 两个插件。
+4. 在弹出的列表里安装这两个插件。
+5. 重新打开聊天输入框的技能选择器,悬浮介绍应显示为中文。
 
 ## 跟上游更新
 
