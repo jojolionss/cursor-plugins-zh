@@ -1,6 +1,6 @@
 ---
 name: automate-me
-description: "把用户的偏好与工作方式沉淀成个人 -mode 技能,经 create-skill + unslop 起草或修订,可选择从近期会话记录中提取新鲜证据。当用户说 \"automate me\"、\"create/update/refresh my -mode skill\"、\"把我的偏好或工作风格变成技能\",或希望代理照用户的习惯做事时使用。"
+description: "把用户的偏好与工作方式沉淀成个人 -mode 技能,经 create-skill + unslop 起草或修订,可选择从近期会话记录中提取新鲜证据。当用户说 'automate me'、『自动化我』、'create/update/refresh my -mode skill'、『建立/更新我的 -mode 技能』『把我的偏好或工作风格变成技能』,或希望代理照用户的习惯做事时使用。"
 disable-model-invocation: true
 ---
 
@@ -14,7 +14,7 @@ This skill orchestrates three others: an inline mining pass (see step 1), Cursor
 
 ### 0. Check for an existing skill
 
-Look for `*-mode/SKILL.md` matching the user's handle, under the project's `.cursor/skills/` or `~/.cursor/skills/`. If one exists, confirm intent with `AskQuestion` (unless they already said "update my skill" or similar):
+Look recursively for `.cursor/skills/**/*-mode/SKILL.md` and `~/.cursor/skills/*-mode/SKILL.md` matching the user's handle. Mode skills can live in a personal category directory (`.cursor/skills/<handle>/`), not only at the top level. If one exists, confirm intent with `AskQuestion` (unless they already said "update my skill" or similar):
 
 - Update the existing skill (default for repeat runs)
 - Start fresh (rare; ask why before doing it)
@@ -66,7 +66,7 @@ The **poteto-mode** skill shows the shape. Read it for granularity. Don't copy i
 
 Use Cursor's built-in `create-skill` skill to author the skill. Placement:
 
-- Path: `.cursor/skills/<handle>-mode/SKILL.md` in the project (or `~/.cursor/skills/<handle>-mode/` if the user prefers a personal skill).
+- Path: preserve an existing mode skill's category. For a new mode, use `.cursor/skills/<handle>/<handle>-mode/SKILL.md` when the repo has an established personal category for that handle; otherwise default to `.cursor/skills/<handle>-mode/SKILL.md` in the project (or `~/.cursor/skills/<handle>-mode/` if the user prefers a personal skill).
 - Handle: the user's first name or chosen identifier.
 - Frontmatter `description`: trigger on their name + `/<handle>-mode` + "work in their style", not on generic keywords like "write code" or "review PR".
 - Frontmatter formatting: follow `create-skill`'s YAML rules. Keep `description` as one YAML scalar; quote it or use `description: >-` with indented continuation lines when punctuation or wrapping requires it.

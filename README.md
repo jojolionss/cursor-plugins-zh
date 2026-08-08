@@ -26,7 +26,7 @@ python3 sync.py
 
 脚本会 git pull 上游,整体重建 `plugins/`,套用翻译,并校验除 description 之外所有内容与上游逐字节一致。断网时加 `--offline` 跳过拉取。
 
-如果 Cursor 安装本地插件时是把目录拷贝走而不是原地引用,更新后还需在插件面板重新安装一次这两个目录。装完第一次更新时留意一下即可。
+同步完记得 `git commit`。Cursor 加载本地 marketplace 时按 git HEAD 解析插件版本,工作区里没提交的改动它读不到;提交后在 Cursor 里 Reload Window(或在插件面板重装这两个插件)即可生效。
 
 上游新增技能或改了原文时,终端会列出这些条目,同时写入 `translations/pending.json`。把它们补译进 `translations/*.json`,再跑一次 `sync.py` 即可。也可以直接把这句话交给 agent:
 
@@ -36,7 +36,9 @@ python3 sync.py
 
 ## 汉化范围
 
-只译 frontmatter 和 plugin.json 里的 description。这段文字有两个读者:技能选择器里的你,以及靠它判断何时触发技能的模型。译文保留了英文触发词(如 `/swarm`、"arena this"),所以模型触发不受影响。正文不译,因为正文是给 agent 执行的指令,翻译会引入行为偏差,而且平时也不需要看。译文第三人称、不超过 1024 字符,符合 Cursor 对 description 的要求。
+只译 frontmatter 和 plugin.json 里的 description。这段文字有两个读者:技能选择器里的你,以及靠它判断何时触发技能的模型。译文保留了英文触发词(如 `/swarm`、"arena this"),所以英文触发不受影响。正文不译,因为正文是给 agent 执行的指令,翻译会引入行为偏差,而且平时也不需要看。译文第三人称、不超过 1024 字符,符合 Cursor 对 description 的要求。
+
+在保留英文触发词的基础上,常用技能的译文还补充了中文触发短语,统一用『』标注,例如『打擂台』(arena)、『蜂群』(swarm)、『说人话』(bro)、『复盘』(reflect)、『poteto 模式』(poteto-mode)。模型按 description 匹配技能,所以用中文自然语言也能触发。斜杠命令(`/swarm` 这类)来自技能目录名,不能翻译,保持英文;principle-* 等仅供内部引用的技能不加触发词。
 
 ## 技能速查表
 
@@ -66,6 +68,9 @@ python3 sync.py
 | setup-pstack | 配置 pstack 各角色用什么模型 |
 | typescript-best-practices | TypeScript 最佳实践,读写 .ts/.tsx 时生效 |
 | unslop | 去除文字里的 AI 腔,始终应用 |
+| bro | 把上一条消息用大白话重讲,『说人话』 |
+| no-comments | 评审前清剿注释,派 Comment Sicko 执行 |
+| technical-writing | 文档、RFC、PR 描述、commit message 的分层写作标准 |
 
 ### pstack 原则技能(principle-*)
 
@@ -98,6 +103,7 @@ python3 sync.py
 | 条目 | 一句话 |
 |---|---|
 | poteto-agent(子代理) | `/poteto-mode` 请求的路由目标 |
+| comment-sicko(子代理) | 注释仇视者,由 no-comments 派出的执行体 |
 | benny 三个技能 | 随插件附带的自动化模板(分诊、复现修复、安装配置),不出现在技能选择器 |
 
 ### thermos

@@ -1,6 +1,6 @@
 ---
 name: swarm
-description: "扇出 N 个并行 worker,收拢全部结果,返回一份汇总报告。当用户说 /swarm、'swarm this',或需要并行覆盖、竞速、车轮战(gauntlet)、探索分区时使用。"
+description: "扇出 N 个并行 worker,收拢全部结果,返回一份汇总报告。当用户说 /swarm、'swarm this'、『蜂群』『开一群子代理并行跑』『并行扇出』,或需要并行覆盖、竞速、车轮战(gauntlet)、探索分区时使用。"
 disable-model-invocation: true
 ---
 

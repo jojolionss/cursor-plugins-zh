@@ -1,6 +1,6 @@
 ---
 name: interrogate
-description: "多个 LLM 评审员从相互独立的角度挑战变更。当用户说 \"interrogate\"、\"adversarial review\"、\"multi-model review\"、\"challenge this\"、\"stress test this code\"、\"find blind spots\"、\"tear this apart\" 时使用。"
+description: "多个 LLM 评审员从相互独立的角度挑战变更。当用户说 'interrogate'、'adversarial review'、'multi-model review'、'challenge this'、'stress test this code'、'find blind spots'、'tear this apart',或用中文说『对抗式评审』『多模型评审』『挑战这个方案』『找盲点』『往死里挑毛病』时使用。"
 disable-model-invocation: true
 ---
 

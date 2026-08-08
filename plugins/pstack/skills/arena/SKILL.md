@@ -1,6 +1,6 @@
 ---
 name: arena
-description: "对同一任务并行派出 N 个候选实现,选出一个基底,再把落选方案里最强的部分嫁接进去。当用户说 /arena、'arena this'、'throw it in the arena',或非平凡产物只做一次尝试会锁死错误形态时使用。"
+description: "对同一任务并行派出 N 个候选实现,选出一个基底,再把落选方案里最强的部分嫁接进去。当用户说 /arena、'arena this'、'throw it in the arena'、『打擂台』『比稿』『多方案竞赛』,或非平凡产物只做一次尝试会锁死错误形态时使用。"
 disable-model-invocation: true
 ---
 

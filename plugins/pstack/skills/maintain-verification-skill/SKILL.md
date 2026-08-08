@@ -1,6 +1,6 @@
 ---
 name: maintain-verification-skill
-description: "周期性巡检,保持项目验证技能与功能地图的诚实:每个功能一个并行的源码读取器,一次真实会话跑遍所有功能,最多产出一个只含已证实修正的 PR。当用户说 /maintain-verification-skill 或 \"audit the verify skill\" 时使用。"
+description: "周期性巡检,保持项目验证技能与功能地图的诚实:每个功能一个并行的源码读取器,一次真实会话跑遍所有功能,最多产出一个只含已证实修正的 PR。当用户说 /maintain-verification-skill、'audit the verify skill'、『巡检验证技能』『审计验证技能』时使用。"
 disable-model-invocation: true
 ---
 

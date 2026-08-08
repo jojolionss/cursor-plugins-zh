@@ -1,6 +1,6 @@
 ---
 name: create-verification-skill
-description: "生成一个项目内的验证技能,让代理像真实用户一样驱动你的应用,不限语言、框架或平台。当用户说 /create-verification-skill、\"make a control skill for this repo\",或项目没有任何脚本化手段来证明 UI/CLI/服务行为时使用。"
+description: "生成一个项目内的验证技能,让代理像真实用户一样驱动你的应用,不限语言、框架或平台。当用户说 /create-verification-skill、'make a control skill for this repo'、『生成验证技能』『给这个仓库做个操控技能』,或项目没有任何脚本化手段来证明 UI/CLI/服务行为时使用。"
 disable-model-invocation: true
 ---
 

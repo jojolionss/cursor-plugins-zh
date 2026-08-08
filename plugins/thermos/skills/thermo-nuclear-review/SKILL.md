@@ -1,6 +1,6 @@
 ---
 name: thermo-nuclear-review
-description: "对分支变更做全面的安全与正确性审计。当用户说 thermo nuclear、thermonuclear、deep review,或要对分支/PR diff 做聚焦于 bug、破坏性变更、安全问题、开发体验回退、feature-gate 泄漏的审计时使用。"
+description: "对分支变更做全面的安全与正确性审计。当用户说 thermo nuclear、thermonuclear、deep review、『深度评审』『安全正确性审计』,或要对分支/PR diff 做聚焦于 bug、破坏性变更、安全问题、开发体验回退、feature-gate 泄漏的审计时使用。"
 disable-model-invocation: true
 ---
 

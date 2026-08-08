@@ -1,6 +1,6 @@
 ---
 name: setup-pstack
-description: "配置 pstack 各角色使用的模型。检测你可用的模型,并写入一条始终生效的规则来覆盖技能默认值。当用户说 /setup-pstack、\"configure pstack models\",或想更改 pstack 的模型选择时使用。"
+description: "配置 pstack 各角色使用的模型。检测你可用的模型,并写入一条始终生效的规则来覆盖技能默认值。当用户说 /setup-pstack、'configure pstack models'、『配置 pstack 模型』『改 pstack 用的模型』时使用。"
 ---
 
 # Setup pstack

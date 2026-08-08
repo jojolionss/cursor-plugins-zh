@@ -1,6 +1,6 @@
 ---
 name: teach
-description: "把一段工作讲得让人真正理解。运行 `how` 与 `why` 技能,把两者的发现织成一份清晰的讲解。当用户说 'teach me this'、'help me really understand X'、'explain this change or subsystem to me' 时使用。"
+description: "把一段工作讲得让人真正理解。运行 `how` 与 `why` 技能,把两者的发现织成一份清晰的讲解。当用户说 'teach me this'、'help me really understand X'、『给我讲懂这个』『教我真正理解 X』『把这个改动/子系统讲给我听』时使用。"
 disable-model-invocation: true
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: blast-radius
-description: "在变更发布前找出 diff 之外可能被波及的地方,并通过运行真实代码来证明\"它之所以安全所依赖的那个事实\",而不是写分析文章。当用户问 'blast radius of X'、'这会不会弄坏别的东西',或审查一个不放心的小 diff 时使用。"
+description: "在变更发布前找出 diff 之外可能被波及的地方,并通过运行真实代码来证明『它之所以安全所依赖的那个事实』,而不是写分析文章。当用户问 'blast radius of X'、『X 的爆炸半径』『波及面分析』『这会不会弄坏别的东西』,或审查一个不放心的小 diff 时使用。"
 disable-model-invocation: true
 ---
 

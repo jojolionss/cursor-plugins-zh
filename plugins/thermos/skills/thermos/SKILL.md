@@ -1,6 +1,6 @@
 ---
 name: thermos
-description: "并行启动两个 thermo-nuclear 评审子代理,再综合两者的发现。当用户说 thermos、double thermo review,或要做 bug/安全与代码质量合并的分支审计时使用。"
+description: "并行启动两个 thermo-nuclear 评审子代理,再综合两者的发现。当用户说 thermos、double thermo review、『热核评审』『双热核评审』,或要做 bug/安全与代码质量合并的分支审计时使用。"
 disable-model-invocation: true
 ---
 

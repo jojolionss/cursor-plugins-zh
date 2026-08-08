@@ -1,6 +1,6 @@
 ---
 name: reflect
-description: "对当前会话记录并行派出三个评审子代理,提炼可学习之处,并把每一条都落实为对某个既有技能的具体修改。当用户说 reflect 时使用。"
+description: "对当前会话记录并行派出三个评审子代理,提炼可学习之处,并把每一条都落实为对某个既有技能的具体修改。当用户说 reflect、『复盘』『复盘这次会话』『反思改进』时使用。"
 disable-model-invocation: true
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: architect
-description: "写代码前先勾画类型、签名与模块结构,并在实现填充期间持续跟进。当用户说 /architect、'architect this'、'design this',或任务非平凡、直接上手写代码会锁死错误形态时使用。"
+description: "写代码前先勾画类型、签名与模块结构,并在实现填充期间持续跟进。当用户说 /architect、'architect this'、'design this'、『先设计再写』『出个架构设计』,或任务非平凡、直接上手写代码会锁死错误形态时使用。"
 disable-model-invocation: true
 ---
 

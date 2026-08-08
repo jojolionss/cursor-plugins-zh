@@ -1,6 +1,6 @@
 ---
 name: figure-it-out
-description: "当没有更窄的 playbook 适用时,为任务定制一套可审计的执行方案:大型迁移、宏大的多部分变更、或人离开之后再回来验收的工作。按任务规模调节严谨程度,运行假设循环,并通过 show-me-your-work 记录决策。当用户说 /figure-it-out、'figure it out',或面对大型迁移、无现成 playbook 可套时使用。"
+description: "当没有更窄的 playbook 适用时,为任务定制一套可审计的执行方案:大型迁移、宏大的多部分变更、或人离开之后再回来验收的工作。按任务规模调节严谨程度,运行假设循环,并通过 show-me-your-work 记录决策。当用户说 /figure-it-out、'figure it out'、『想办法搞定』『自己定一套方案』,或面对大型迁移、无现成 playbook 可套时使用。"
 disable-model-invocation: true
 ---
 
