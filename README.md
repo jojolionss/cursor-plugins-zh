@@ -7,6 +7,7 @@
 - `plugins/pstack`、`plugins/thermos` 是汉化后的插件,安装时选这两个目录。它们由 `sync.py` 全量重建生成,不要手改,重跑同步会覆盖。
 - `translations/pstack.json`、`translations/thermos.json` 是翻译映射表,也是这个仓库里唯一需要人维护的文件。键是插件内的文件路径,值是 `{en, zh}`。`en` 存翻译时的原文,用来检测上游后来有没有改过这段话。
 - `sync.py` 是同步脚本。拉取上游仓库,重建 `plugins/`,套用翻译,再做完整性校验。
+- `refresh_cursor_cache.py` 把当前 `plugins/` 拷进 Cursor 钉死的本地 marketplace 缓存。`sync.py` 和 `git commit` 不会让已装插件跟进新 SHA,要靠这个脚本,然后新开对话。
 - `upstream/` 是上游仓库的稀疏克隆,已被 git 忽略,不入库。
 
 ## 安装
@@ -26,7 +27,19 @@ python3 sync.py
 
 脚本会 git pull 上游,整体重建 `plugins/`,套用翻译,并校验除 description 之外所有内容与上游逐字节一致。断网时加 `--offline` 跳过拉取。
 
-同步完记得 `git commit`。Cursor 安装本地 marketplace 插件时,会把当时的 HEAD 固定成快照(缓存目录以 commit SHA 命名,见 `~/.cursor/plugins/cache/cursor-plugins-zh/`),之后重启、Reload Window 都不会自动跟进新 commit。要吃到更新,需要在插件面板对 pstack 和 Thermos 执行更新;没有更新入口就卸载这两个插件,重新选 `~/cursor-plugins-zh` 走本地安装再装一次。验证是否装上新快照:pstack 插件页的版本号应等于 `plugins/pstack/.cursor-plugin/plugin.json` 的 version,或看技能列表里有没有新技能。
+同步完记得 `git commit`,然后跑:
+
+```bash
+python3 refresh_cursor_cache.py
+```
+
+Cursor 把本地 marketplace 钉在一个 commit 上,把这个 commit 克隆到 `~/.cursor/plugins/marketplaces/_/users/<你>/<sha>/`,再把每个插件拷进 `~/.cursor/plugins/cache/cursor-plugins-zh/<插件>/<sha>/`,两处目录都按这个 SHA 命名。
+
+钉的不一定是 HEAD。首次添加那次钉的是 HEAD `0b64808`。移除再加那次,HEAD 是 `b710962`,钉住的却是 `9d84196`,即最近一次改动 `plugins/` 的 commit。两次对不上,所以不要假设重加就能拿到 HEAD,加完按下面的方法核对版本号。
+
+`refresh_cursor_cache.py` 把当前 `plugins/` 就地拷进这两处目录,不改钉住的 commit。拷完后**新开一个对话**,斜杠菜单才会出现新技能。本会话加载过的快照不会自己变。Cursor 之后若重新克隆,会还原成钉住的 commit 的内容,拷进去的改动就没了。所以改动要落在 commit 里才算数。
+
+要让 Cursor 钉到新 commit,或者缓存已经被还原回旧内容,到插件面板把整个本地 marketplace(不是两个插件)移除,再选 `~/cursor-plugins-zh` 加一次。验证:pstack 版本应等于 `plugins/pstack/.cursor-plugin/plugin.json` 的 version,技能列表里应有 `/bro` 和 `/no-comments`。`comment-sicko` 是子代理,斜杠入口是 `/no-comments`,菜单里显示为 Comment Sicko,没有 `/comment-sicko` 这条命令。
 
 上游新增技能或改了原文时,终端会列出这些条目,同时写入 `translations/pending.json`。把它们补译进 `translations/*.json`,再跑一次 `sync.py` 即可。也可以直接把这句话交给 agent:
 
