@@ -1,7 +1,7 @@
 {
 	"name": "pstack",
 	"displayName": "pstack",
-	"version": "0.14.0",
+	"version": "0.14.1",
 	"description": "想跑得快,先扎得深。pstack 帮你写更少但质量更高的代码,提供一套严谨、可放心并行化的代理工作流。",
 	"author": {
 		"name": "Lauren Tan"
