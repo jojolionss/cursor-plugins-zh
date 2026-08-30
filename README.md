@@ -86,6 +86,7 @@ python3 refresh_cursor_cache.py
 | bro | 把上一条消息用大白话重讲,『说人话』 |
 | no-comments | 评审前清剿注释,派 Comment Sicko 执行 |
 | technical-writing | 文档、RFC、PR 描述、commit message 的分层写作标准 |
+| make-bot-ui | 给 Grok Bot 做 webhook 页面/仪表盘 |
 
 ### pstack 原则技能(principle-*)
 

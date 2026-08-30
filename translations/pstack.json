@@ -63,6 +63,10 @@
     "en": "Periodic pass that keeps a project's verification skill and feature map honest: parallel source readers per feature, one live session driving every feature, at most one PR of proven corrections. Use for /maintain-verification-skill or \"audit the verify skill\".",
     "zh": "周期性巡检,保持项目验证技能与功能地图的诚实:每个功能一个并行的源码读取器,一次真实会话跑遍所有功能,最多产出一个只含已证实修正的 PR。当用户说 /maintain-verification-skill、'audit the verify skill'、『巡检验证技能』『审计验证技能』时使用。"
   },
+  "skills/make-bot-ui/SKILL.md": {
+    "en": "Use when building a custom UI (page, dashboard, buttons) that should wake a Grok Bot over a webhook, when the user must provide a webhook sender key, or when exposing that UI on Tailscale.",
+    "zh": "为会通过 webhook 唤醒 Grok Bot 的自定义界面(页面、仪表盘、按钮)搭建服务。当用户说 /make-bot-ui、'make a bot UI'、『做 bot 界面』『做 webhook 页面』,需要提供 webhook sender key,或要把该界面放到 Tailscale 上时使用。"
+  },
   "skills/no-comments/SKILL.md": {
     "en": "Spawn Comment Sicko, fix accepted findings, and offer encodings for claimed constraints.",
     "zh": "派出 Comment Sicko 清剿注释,修复采纳的发现,并为注释里声称的约束提供结构化编码替代。当用户说 /no-comments、『清理注释』『把废话注释删掉』,或在提交评审前使用。"

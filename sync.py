@@ -114,13 +114,51 @@ def parse_md_description(text, path):
         die(f"{path}: expected one description: in frontmatter, got {len(desc_idxs)}")
     idx = desc_idxs[0]
     raw = lines[idx][len("description:"):].strip()
+    end = idx
     if len(raw) >= 2 and raw[0] == '"' and raw[-1] == '"':
         value = unescape_quoted(raw[1:-1])
+    elif raw in (">", ">-", ">+", "|", "|-", "|+"):
+        block = []
+        j = idx + 1
+        while j < close:
+            line = lines[j]
+            stripped = line.rstrip("\r\n")
+            if stripped == "":
+                if block:
+                    block.append("")
+                    end = j
+                j += 1
+                continue
+            if line[:1] in (" ", "\t"):
+                block.append(stripped.lstrip())
+                end = j
+                j += 1
+                continue
+            break
+        if not block:
+            die(f"{path}: empty folded description")
+        if raw.startswith(">"):
+            parts, para = [], []
+            for item in block:
+                if item == "":
+                    if para:
+                        parts.append(" ".join(para))
+                        para = []
+                    parts.append("")
+                else:
+                    para.append(item)
+            if para:
+                parts.append(" ".join(para))
+            value = "\n".join(parts).strip()
+        else:
+            value = "\n".join(block)
     else:
         value = raw
-    if not value or value[0] in ">|":
+        if not value or value[0] in ">|":
+            die(f"{path}: unsupported description value")
+    if not value:
         die(f"{path}: unsupported description value")
-    return value, idx, lines
+    return value, idx, end, lines
 
 
 def current_en(path, rel):
@@ -130,9 +168,9 @@ def current_en(path, rel):
 
 
 def patch_markdown(path, zh):
-    _en, idx, lines = parse_md_description(read_text(path), path)
+    _en, idx, end, lines = parse_md_description(read_text(path), path)
     nl = "\r\n" if lines[idx].endswith("\r\n") else "\n"
-    lines[idx] = f'description: "{escape_quoted(zh)}"{nl}'
+    lines[idx:end + 1] = [f'description: "{escape_quoted(zh)}"{nl}']
     write_text(path, "".join(lines))
 
 
@@ -189,10 +227,10 @@ def validate_plugin(name, patched):
                 die(f"{dp}: plugin.json differs beyond description")
         else:
             s_text, d_text = read_text(sp), read_text(dp)
-            _e, s_idx, s_lines = parse_md_description(s_text, sp)
-            _e, d_idx, d_lines = parse_md_description(d_text, dp)
+            _e, s_idx, s_end, s_lines = parse_md_description(s_text, sp)
+            _e, d_idx, d_end, d_lines = parse_md_description(d_text, dp)
             restored = list(d_lines)
-            restored[d_idx] = s_lines[s_idx]
+            restored[d_idx:d_end + 1] = s_lines[s_idx:s_end + 1]
             if "".join(restored) != s_text:
                 die(f"{dp}: restoring description line does not match upstream")
 
