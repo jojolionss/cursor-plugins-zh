@@ -53,7 +53,7 @@ python3 refresh_cursor_cache.py
 
 在保留英文触发词的基础上,常用技能的译文还补充了中文触发短语,统一用『』标注,例如『打擂台』(arena)、『蜂群』(swarm)、『说人话』(bro)、『复盘』(reflect)、『poteto 模式』(poteto-mode)。斜杠命令(`/swarm` 这类)来自技能目录名,不能翻译,保持英文;principle-* 等仅供内部引用的技能不加触发词。
 
-注意触发词的实际生效范围。pstack 里只有 how、why、unslop、setup-pstack、typescript-best-practices 五个技能允许模型按 description 自动触发,对它们说中文即可命中。其余 pstack 技能(arena、swarm、bro 等)都带 `disable-model-invocation: true`,这是上游设计:入口是斜杠命令手动附加,或由 poteto-mode 等流程在会话内部调用;对这些技能,中文触发短语的作用是悬浮卡说明,以及进入 poteto 会话后的路由提示。子代理(poteto-agent、Comment Sicko)始终按 description 被路由,中文描述直接生效。
+注意触发词的实际生效范围。从 0.15.0 起,pstack 里只有 setup-pstack 一个技能允许模型按 description 自动触发,对它说中文即可命中。how、why、unslop、typescript-best-practices、make-bot-ui 自上游 PR #300 起也带 `disable-model-invocation: true`,和其余 pstack 技能(arena、swarm、bro 等)归为一类。这些技能的入口是斜杠命令手动附加,或由 poteto-mode 等流程在会话内部调用;对它们,中文触发短语的作用是悬浮卡说明,以及进入 poteto 会话后的路由提示。子代理(poteto-agent、Comment Sicko)始终按 description 被路由,中文描述直接生效。
 
 ## 技能速查表
 
@@ -95,6 +95,7 @@ python3 refresh_cursor_cache.py
 | laziness-protocol | 最小改动,偏向删除 |
 | foundational-thinking | 先定数据结构,再写逻辑 |
 | redesign-from-first-principles | 新需求当作第一天就有,重新设计而非打补丁 |
+| attack-the-premise | 同一前提下的修复接连失败,先质疑前提而非再修一次 |
 | subtract-before-you-add | 先做减法,再做加法 |
 | minimize-reader-load | 降低读代码的心智负担 |
 | outcome-oriented-execution | 直奔目标架构,不留一次性兼容代码 |
@@ -110,6 +111,7 @@ python3 refresh_cursor_cache.py
 | prove-it-works | 对真实产物验证,不信代理指标 |
 | fix-root-causes | 修根因,不糊症状 |
 | sequence-verifiable-units | 拆成小单元,步步可验证地推进 |
+| test-behavior-not-implementation | 像用户那样调用并断言具体结果,不测实现细节 |
 | guard-the-context-window | 守住上下文窗口,大块内容交给子代理 |
 | never-block-on-the-human | 可逆的事直接做,不停下来问 |
 | encode-lessons-in-structure | 把重复的教训固化成结构而非文字 |
