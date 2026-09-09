@@ -16,7 +16,7 @@ import sys
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 PLUGINS = os.path.join(ROOT, "plugins")
-PLUGIN_NAMES = ("pstack", "thermos")
+PLUGIN_NAMES = ("pstack",)
 CACHE_ROOT = os.path.expanduser("~/.cursor/plugins/cache/cursor-plugins-zh")
 MARKET_ROOT = os.path.join(
     os.path.expanduser("~/.cursor/plugins/marketplaces/_/users"),

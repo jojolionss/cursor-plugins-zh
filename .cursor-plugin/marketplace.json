@@ -4,18 +4,13 @@
     "name": "xiongchen"
   },
   "metadata": {
-    "description": "pstack 与 thermos 的本地汉化 marketplace。插件由 sync.py 从上游 cursor/plugins 同步生成,description 已译为中文。"
+    "description": "pstack 的本地汉化 marketplace。插件由 sync.py 从上游 cursor/plugins 同步生成,description 已译为中文。"
   },
   "plugins": [
     {
       "name": "pstack",
       "source": "./plugins/pstack",
       "description": "想跑得快,先扎得深。pstack 帮你写更少但质量更高的代码,提供一套严谨、可放心并行化的代理工作流。"
-    },
-    {
-      "name": "thermos",
-      "source": "./plugins/thermos",
-      "description": "Thermo-nuclear 分支评审:深度的安全与正确性审计、严苛的代码质量评分标准、并行子代理、thermos 编排,以及可选的 merge-ready PR 流程。"
     }
   ]
 }

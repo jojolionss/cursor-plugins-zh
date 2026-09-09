@@ -13,7 +13,7 @@ UPSTREAM = os.path.join(ROOT, "upstream")
 PLUGINS = os.path.join(ROOT, "plugins")
 TRANSLATIONS = os.path.join(ROOT, "translations")
 PENDING = os.path.join(TRANSLATIONS, "pending.json")
-PLUGIN_NAMES = ("pstack", "thermos")
+PLUGIN_NAMES = ("pstack",)
 UPSTREAM_URL = "https://github.com/cursor/plugins"
 
 
@@ -33,12 +33,12 @@ def refresh_upstream(offline):
              UPSTREAM_URL, "upstream"],
             check=True, cwd=ROOT,
         )
-        subprocess.run(
-            ["git", "-C", "upstream", "sparse-checkout", "set", "pstack", "thermos"],
-            check=True, cwd=ROOT,
-        )
     else:
         subprocess.run(["git", "-C", "upstream", "pull", "--ff-only"], check=True, cwd=ROOT)
+    subprocess.run(
+        ["git", "-C", "upstream", "sparse-checkout", "set", *PLUGIN_NAMES],
+        check=True, cwd=ROOT,
+    )
     out = subprocess.check_output(
         ["git", "-C", UPSTREAM, "log", "-1", "--format=%h %ci"], text=True,
     ).strip()

@@ -1,21 +1,21 @@
 # cursor-plugins-zh
 
-[cursor/plugins](https://github.com/cursor/plugins) 里 pstack 与 thermos 两个插件的本地汉化版。只汉化 description,也就是技能选择器悬浮卡片里的那段介绍,以及插件管理页的简介。技能名称和正文保持英文原样。
+[cursor/plugins](https://github.com/cursor/plugins) 里 pstack 插件的本地汉化版。只汉化 description,也就是技能选择器悬浮卡片里的那段介绍,以及插件管理页的简介。技能名称和正文保持英文原样。
 
 ## 目录结构
 
-- `plugins/pstack`、`plugins/thermos` 是汉化后的插件,安装时选这两个目录。它们由 `sync.py` 全量重建生成,不要手改,重跑同步会覆盖。
-- `translations/pstack.json`、`translations/thermos.json` 是翻译映射表,也是这个仓库里唯一需要人维护的文件。键是插件内的文件路径,值是 `{en, zh}`。`en` 存翻译时的原文,用来检测上游后来有没有改过这段话。
+- `plugins/pstack` 是汉化后的插件,安装时选这个目录。它由 `sync.py` 全量重建生成,不要手改,重跑同步会覆盖。
+- `translations/pstack.json` 是翻译映射表,也是这个仓库里唯一需要人维护的文件。键是插件内的文件路径,值是 `{en, zh}`。`en` 存翻译时的原文,用来检测上游后来有没有改过这段话。
 - `sync.py` 是同步脚本。拉取上游仓库,重建 `plugins/`,套用翻译,再做完整性校验。
 - `refresh_cursor_cache.py` 把当前 `plugins/` 拷进 Cursor 钉死的本地 marketplace 缓存。`sync.py` 和 `git commit` 不会让已装插件跟进新 SHA,要靠这个脚本,然后新开对话。
 - `upstream/` 是上游仓库的稀疏克隆,已被 git 忽略,不入库。
 
 ## 安装
 
-1. 在 Cursor 的插件管理里卸载或停用商店版的 pstack 和 thermos。不卸载的话,每个技能会出现英文、中文两份。
+1. 在 Cursor 的插件管理里卸载或停用商店版的 pstack。不卸载的话,每个技能会出现英文、中文两份。
 2. 确认本仓库至少有一次 git commit(`git rev-parse HEAD` 能打出 SHA)。Cursor 加载本地 marketplace 时会解析 `plugin@HEAD`;仓库还没有 commit 时会报 `Failed to resolve version for plugin *@HEAD`,界面显示「加载插件错误」,并可能拖慢插件重载。
-3. 用插件面板的本地安装入口,选中仓库根目录 `~/cursor-plugins-zh`(不是 `plugins/` 子目录)。Cursor 要求所选文件夹带有 `.cursor-plugin/marketplace.json`,本仓库根目录已按上游同款格式配好,里面挂了 pstack 和 thermos 两个插件。
-4. 在弹出的列表里安装这两个插件。
+3. 用插件面板的本地安装入口,选中仓库根目录 `~/cursor-plugins-zh`(不是 `plugins/` 子目录)。Cursor 要求所选文件夹带有 `.cursor-plugin/marketplace.json`,本仓库根目录已按上游同款格式配好,里面挂了 pstack。
+4. 在弹出的列表里安装 pstack。
 5. 重新打开聊天输入框的技能选择器,悬浮介绍应显示为中文。
 
 ## 跟上游更新
@@ -39,11 +39,11 @@ python3 refresh_cursor_cache.py
 
 `refresh_cursor_cache.py` 把当前 `plugins/` 拷进正在生效的 SHA 目录,不改钉住的 commit。这是日常更新的快路径。拷完后**新开一个对话**,斜杠菜单才会出现新技能。Cursor 之后若重新克隆,会还原成钉住的 commit 的内容,所以改动要落在 commit 里才算数。
 
-要让 Cursor 钉到新 commit,或者缓存已经被还原回旧内容,到插件面板把整个本地 marketplace(不是两个插件)移除,再选 `~/cursor-plugins-zh` 加一次。验证:pstack 版本应等于 `plugins/pstack/.cursor-plugin/plugin.json` 的 version,技能列表里应有 `/bro` 和 `/no-comments`。`comment-sicko` 是子代理,斜杠入口是 `/no-comments`,菜单里显示为 Comment Sicko,没有 `/comment-sicko` 这条命令。
+要让 Cursor 钉到新 commit,或者缓存已经被还原回旧内容,到插件面板把整个本地 marketplace(不是 pstack 插件本身)移除,再选 `~/cursor-plugins-zh` 加一次。验证:pstack 版本应等于 `plugins/pstack/.cursor-plugin/plugin.json` 的 version,技能列表里应有 `/bro` 和 `/no-comments`。`comment-sicko` 是子代理,斜杠入口是 `/no-comments`,菜单里显示为 Comment Sicko,没有 `/comment-sicko` 这条命令。
 
-上游新增技能或改了原文时,终端会列出这些条目,同时写入 `translations/pending.json`。把它们补译进 `translations/*.json`,再跑一次 `sync.py` 即可。也可以直接把这句话交给 agent:
+上游新增技能或改了原文时,终端会列出这些条目,同时写入 `translations/pending.json`。把它们补译进 `translations/pstack.json`,再跑一次 `sync.py` 即可。也可以直接把这句话交给 agent:
 
-> 把 translations/pending.json 里的条目补译进 translations/*.json(风格对齐已有条目),然后重跑 python3 sync.py,确认校验通过。
+> 把 translations/pending.json 里的条目补译进 translations/pstack.json(风格对齐已有条目),然后重跑 python3 sync.py,确认校验通过。
 
 想备份到自己的 GitHub,这个目录本身就是 git 仓库,`git remote add origin <你的仓库>` 后 push 即可。
 
@@ -53,7 +53,7 @@ python3 refresh_cursor_cache.py
 
 在保留英文触发词的基础上,常用技能的译文还补充了中文触发短语,统一用『』标注,例如『打擂台』(arena)、『蜂群』(swarm)、『说人话』(bro)、『复盘』(reflect)、『poteto 模式』(poteto-mode)。斜杠命令(`/swarm` 这类)来自技能目录名,不能翻译,保持英文;principle-* 等仅供内部引用的技能不加触发词。
 
-注意触发词的实际生效范围。pstack 里只有 how、why、unslop、setup-pstack、typescript-best-practices 五个技能允许模型按 description 自动触发,对它们说中文即可命中。其余 pstack 技能(arena、swarm、bro 等)和 thermos 的三个技能都带 `disable-model-invocation: true`,这是上游设计:入口是斜杠命令手动附加,或由 poteto-mode 等流程在会话内部调用;对这些技能,中文触发短语的作用是悬浮卡说明,以及进入 poteto 会话后的路由提示。子代理(poteto-agent、Comment Sicko、thermos 两个评审)始终按 description 被路由,中文描述直接生效。
+注意触发词的实际生效范围。pstack 里只有 how、why、unslop、setup-pstack、typescript-best-practices 五个技能允许模型按 description 自动触发,对它们说中文即可命中。其余 pstack 技能(arena、swarm、bro 等)都带 `disable-model-invocation: true`,这是上游设计:入口是斜杠命令手动附加,或由 poteto-mode 等流程在会话内部调用;对这些技能,中文触发短语的作用是悬浮卡说明,以及进入 poteto 会话后的路由提示。子代理(poteto-agent、Comment Sicko)始终按 description 被路由,中文描述直接生效。
 
 ## 技能速查表
 
@@ -122,18 +122,9 @@ python3 refresh_cursor_cache.py
 | comment-sicko(子代理) | 注释仇视者,由 no-comments 派出的执行体 |
 | benny 三个技能 | 随插件附带的自动化模板(分诊、复现修复、安装配置),不出现在技能选择器 |
 
-### thermos
-
-| 条目 | 一句话 |
-|---|---|
-| thermos | 并行跑两种 thermo-nuclear 评审再汇总 |
-| thermo-nuclear-review | 分支变更的安全与正确性深度审计 |
-| thermo-nuclear-code-quality-review | 极严苛的可维护性评审 |
-| 两个 subagent | 供 Task 调用的上述两种评审执行体 |
-
 ## 出处与许可
 
-整个 `plugins/` 目录由 `sync.py` 从 [cursor/plugins](https://github.com/cursor/plugins) 生成。上游 pstack 与 thermos 都是 MIT 许可,pstack 版权归 Lauren Tan,thermos 版权归 Cursor。`plugins/pstack/LICENSE` 与 `plugins/thermos/LICENSE` 就是上游的许可文件,原样保留。
+整个 `plugins/` 目录由 `sync.py` 从 [cursor/plugins](https://github.com/cursor/plugins) 生成。上游 pstack 是 MIT 许可,版权归 Lauren Tan。`plugins/pstack/LICENSE` 就是上游的许可文件,原样保留。
 
 本仓库自己的代码,即 `sync.py`、`refresh_cursor_cache.py`、`translations/` 映射表和这份 README,以 MIT 许可发布,许可文件是根目录的 `LICENSE`。
 
