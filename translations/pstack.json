@@ -52,8 +52,8 @@
     "zh": "当没有更窄的 playbook 适用时,为任务定制一套可审计的执行方案:大型迁移、宏大的多部分变更、或人离开之后再回来验收的工作。按任务规模调节严谨程度,运行假设循环,并通过 show-me-your-work 记录决策。当用户说 /figure-it-out、'figure it out'、『想办法搞定』『自己定一套方案』,或面对大型迁移、无现成 playbook 可套时使用。"
   },
   "skills/how/SKILL.md": {
-    "en": "Use for \"how does X work\", code walkthroughs before changing something, and placement / ownership / layering questions (\"where should this live\", \"which package owns this\", \"is this the right layer\"). Explains subsystem architecture, runtime flow, onboarding mental models. Can critique architecture. Use why for motivation.",
-    "zh": "用于\"X 是怎么工作的\"、改代码前的代码走读,以及放置/归属/分层问题(\"这段该放在哪\"、\"哪个包拥有它\"、\"这一层对不对\")。讲解子系统架构、运行时流程、上手用的心智模型,也能批判架构。问动机用 why。"
+    "en": "Use for \"how does X work\", code walkthroughs before changing something, and placement / ownership / layering questions (\"where should this live\", \"which package owns this\", \"is this the right layer\"). Explains subsystem architecture, runtime flow, onboarding mental models. Use why for motivation.",
+    "zh": "用于\"X 是怎么工作的\"、改代码前的代码走读,以及放置/归属/分层问题(\"这段该放在哪\"、\"哪个包拥有它\"、\"这一层对不对\")。讲解子系统架构、运行时流程、上手用的心智模型。问动机用 why。"
   },
   "skills/interrogate/SKILL.md": {
     "en": "Use for \"interrogate\", \"adversarial review\", \"multi-model review\", \"challenge this\", \"stress test this code\", \"find blind spots\", or \"tear this apart\". Multiple LLM reviewers challenge changes from independent angles.",
@@ -74,6 +74,10 @@
   "skills/poteto-mode/SKILL.md": {
     "en": "poteto's agent style for concise, detailed responses, deliberate subagents, unslopped prose, simple code, and verified work. Use for poteto, /poteto-mode, or requests to work in this style.",
     "zh": "poteto 的代理风格:简洁而详实的回复、审慎的子代理使用、无 AI 腔的文字、简单的代码、验证过的工作。当用户说 poteto、/poteto-mode、『poteto 模式』『按 poteto 流程来』『用 poteto 风格干活』,或要求按这种风格工作时使用。"
+  },
+  "skills/principle-attack-the-premise/SKILL.md": {
+    "en": "Apply when two or more fixes that share one premise have failed the same gate. Take a census of which actors hold the imbalance before the next fix, then question the premise instead of writing another fix that assumes it.",
+    "zh": "适用于至少两个基于同一前提的修复都没通过同一道关卡时。在下一个修复之前,先清点不平衡落在哪些参与者身上,然后质疑前提本身,而不是再写一个默认它成立的修复。"
   },
   "skills/principle-boundary-discipline/SKILL.md": {
     "en": "Apply when wiring validation, error handling, or framework adapters. Concentrate guards at system boundaries (CLI, config, network, external APIs); trust internal types and keep business logic in pure functions.",
@@ -152,8 +156,12 @@
     "zh": "适用于多步工作(批量清理、迁移、成批相似编辑)以及 commit 与 PR 的堆叠方式。把工作切成每步都收在可验证状态的小单元,验完一个再做下一个,让交付顺序本身对评审者自证。"
   },
   "skills/principle-subtract-before-you-add/SKILL.md": {
-    "en": "Apply when sequencing an addition, refactor, or rewrite. Remove dead weight, redundant validators, and stub references first, then build on the simpler base.",
+    "en": "Apply when sequencing an addition, refactor, or rewrite. Remove dead code, redundant validators, and stub references first, then build on the simpler base.",
     "zh": "适用于安排新增、重构或重写的顺序时。先清掉死代码、冗余校验器和残留引用,再在更简单的基础上构建。"
+  },
+  "skills/principle-test-behavior-not-implementation/SKILL.md": {
+    "en": "Apply when you write, change, or keep a test. Call the code the way its users do and assert the result they observe against a literal expected value. If the test would still pass when every imported function returns undefined, rewrite the assertion or delete the test.",
+    "zh": "适用于编写、修改或保留一个测试时。像代码的使用方那样调用它,断言使用方观察到的结果等于一个字面量预期值。如果导入的每个函数都返回 undefined 而测试照样通过,就重写断言或删掉这个测试。"
   },
   "skills/principle-type-system-discipline/SKILL.md": {
     "en": "Apply when designing types, reviewing a function signature, or writing code in any statically-typed language. Make illegal states unrepresentable, brand semantic primitives, parse external data at boundaries, refuse to lie to the compiler, exhaust variants, derive from authoritative schemas.",

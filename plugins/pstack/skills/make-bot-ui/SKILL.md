@@ -1,6 +1,7 @@
 ---
 name: Make Bot UI
 description: "为会通过 webhook 唤醒 Grok Bot 的自定义界面(页面、仪表盘、按钮)搭建服务。当用户说 /make-bot-ui、'make a bot UI'、『做 bot 界面』『做 webhook 页面』,需要提供 webhook sender key,或要把该界面放到 Tailscale 上时使用。"
+disable-model-invocation: true
 ---
 # How to make a bot UI
 
