@@ -176,8 +176,8 @@
     "zh": "对当前会话记录并行派出三个评审子代理,提炼可学习之处,并把每一条都落实为对某个既有技能的具体修改。当用户说 reflect、『复盘』『复盘这次会话』『反思改进』时使用。"
   },
   "skills/setup-pstack/SKILL.md": {
-    "en": "Configure which models pstack uses per role. Detects your available models and writes an always-applied rule that overrides the skill defaults. Use for /setup-pstack, \"configure pstack models\", or changing pstack's model choices.",
-    "zh": "配置 pstack 各角色使用的模型。检测你可用的模型,并写入一条始终生效的规则来覆盖技能默认值。当用户说 /setup-pstack、'configure pstack models'、『配置 pstack 模型』『改 pstack 用的模型』时使用。"
+    "en": "Configure which models pstack uses per role and at what reasoning budget. Detects your available models and writes an always-applied rule that overrides the skill defaults. Use for /setup-pstack, \"configure pstack models\", \"pstack budget\", or changing pstack's model choices.",
+    "zh": "配置 pstack 各角色使用的模型与推理预算。检测你可用的模型,并写入一条始终生效的规则来覆盖技能默认值。当用户说 /setup-pstack、'configure pstack models'、'pstack budget'、『配置 pstack 模型』『改 pstack 用的模型』『调 pstack 推理预算』时使用。"
   },
   "skills/show-me-your-work/SKILL.md": {
     "en": "Keep a reviewable decision trail for long-running or unattended work: a TSV log with one row per decision (what, why, evidence, result). Local by default; commit it when a reviewer needs the trail to trust the result. Use for /show-me-your-work, autonomous or multi-phase runs, or work a human reviews after stepping away.",
