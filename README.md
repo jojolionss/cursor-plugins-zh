@@ -80,7 +80,7 @@ python3 refresh_cursor_cache.py
 | maintain-verification-skill | 周期巡检验证技能与功能地图是否失真 |
 | show-me-your-work | 长任务留一份可审查的决策日志 |
 | automate-me | 把个人偏好与工作风格沉淀成 -mode 技能 |
-| setup-pstack | 配置 pstack 各角色用什么模型 |
+| setup-pstack | 配置 pstack 各角色用什么模型、多大的推理预算 |
 | typescript-best-practices | TypeScript 最佳实践,读写 .ts/.tsx 时生效 |
 | unslop | 去除文字里的 AI 腔,始终应用 |
 | bro | 把上一条消息用大白话重讲,『说人话』 |
