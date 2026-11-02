@@ -8,8 +8,8 @@
     "zh": "一个癫狂的注释仇视者,以删除注释为乐,并对绕路(workaround)代码点名谴责。"
   },
   "agents/poteto-agent.md": {
-    "en": "Routing target for `/poteto-mode` and any request for poteto's style. Resume an existing `poteto-agent` for the conversation rather than spawning a sibling. Reads the `poteto-mode` skill's `SKILL.md` in full before any work, including its inline Principles index. Substituting `generalPurpose` skips that read and drifts.",
-    "zh": "`/poteto-mode` 及一切指名要 poteto 风格的请求的路由目标。同一会话应 resume 已有的 poteto-agent,而不是再开一个同级实例。开工前先完整读取 poteto-mode 技能的 SKILL.md,包括其内联的 Principles 索引。换用 generalPurpose 会跳过这次阅读并产生漂移。"
+    "en": "Delegate subagent for code-writing and helper tasks spawned during a `/poteto-mode` run. Use for delegates, not as the runner for `/poteto-mode` itself. Spawn a fresh `poteto-agent` for each new task, and resume one only in the strict cases that poteto-mode's Subagents section names. Reads the `poteto-mode` skill's `SKILL.md` in full before any work, including its inline Principles index. Substituting `generalPurpose` skips that read and drifts.",
+    "zh": "`/poteto-mode` 运行期间派出的委托子代理,负责写代码和辅助任务。只用作委托,不用来跑 `/poteto-mode` 本身。每个新任务都新开一个 poteto-agent,只有在 poteto-mode 的 Subagents 一节列明的严格情形下才 resume 已有实例。开工前先完整读取 poteto-mode 技能的 SKILL.md,包括其内联的 Principles 索引。换用 generalPurpose 会跳过这次阅读并产生漂移。"
   },
   "automations/benny/skills/reproduce-and-fix-issues/SKILL.md": {
     "en": "Reproduce triaged Slack bugs through a configured app-control adapter, verify existing fixes, and open a bounded draft pull request only after before-and-after proof. Use only from the configured Benny repro automation.",
@@ -35,6 +35,10 @@
     "en": "Use for \"automate me\", \"create/update/refresh my -mode skill\", \"turn/capture my preferences or working style into a skill\", or wanting agents to follow how the user works. Drafts or revises a personal -mode skill via create-skill + unslop, optionally pulling fresh evidence from recent transcripts.",
     "zh": "把用户的偏好与工作方式沉淀成个人 -mode 技能,经 create-skill + unslop 起草或修订,可选择从近期会话记录中提取新鲜证据。当用户说 'automate me'、『自动化我』、'create/update/refresh my -mode skill'、『建立/更新我的 -mode 技能』『把我的偏好或工作风格变成技能』,或希望代理照用户的习惯做事时使用。"
   },
+  "skills/benchmark-checklist/SKILL.md": {
+    "en": "Vet a perf measurement (limiter, tuning, limits, errors, repeatability, relevance, and whether the work happened) before you report or act on it. Use when you run a benchmark or report a speedup or regression you measured.",
+    "zh": "在报告或依据一次性能测量行动之前,先逐项审查它:瓶颈在哪、调优是否到位、是否撞上上限、有无报错、能否复现、是否切题,以及要测的工作是否真的发生了。当跑基准测试,或要报告自己测出的提速或退化时使用,也可以说『跑分自查』『核对基准结果』。"
+  },
   "skills/blast-radius/SKILL.md": {
     "en": "Find what a change could break somewhere else before it ships, beyond the diff, and prove the one fact it's safe because of by running real code instead of writing it up. Use for 'blast radius of X', 'what could this break', or reviewing a small diff you don't trust.",
     "zh": "在变更发布前找出 diff 之外可能被波及的地方,并通过运行真实代码来证明『它之所以安全所依赖的那个事实』,而不是写分析文章。当用户问 'blast radius of X'、『X 的爆炸半径』『波及面分析』『这会不会弄坏别的东西』,或审查一个不放心的小 diff 时使用。"
@@ -43,21 +47,45 @@
     "en": "Restate the last message in plain human language, with no jargon.",
     "zh": "把上一条消息用大白话重说一遍,不带任何行话。当用户说 /bro、bro,或用中文说『说人话』『讲人话』『用大白话再说一遍』时使用。"
   },
+  "skills/correct/SKILL.md": {
+    "en": "Find the mistakes agents keep repeating in this repo and make each one impossible. Try architecture first, then types, then a lint whose error names the fix, then a test, and write docs last. Prove each check fails on a real past mistake. Repeat this each time the operator corrects you. Use for /correct.",
+    "zh": "找出 agent 在这个仓库里反复犯的错,让每一种都变得不可能再犯。依次优先尝试架构、类型、报错信息直接写明改法的 lint、测试,最后才写文档。每道检查都要证明它能拦住一个真实发生过的错误。每次被操作者纠正时都重复这个过程。当用户说 /correct、『别再犯这个错』『把这个错误根治掉』时使用。"
+  },
+  "skills/create-formal-verification-skill/SKILL.md": {
+    "en": "Generate a project-local skill that formally verifies the code where a bug costs the most and tests reach the least, in any language, with whichever verification tool fits. Use for /create-formal-verification-skill, \"model-check this race\", \"prove this invariant\", or when concurrency, retries, state machines, parsers, or unsafe code need more than tests.",
+    "zh": "生成一个项目本地技能,对 bug 代价最高、测试最难覆盖的代码做形式化验证,不限语言,验证工具按场景选。当用户说 /create-formal-verification-skill、\"model-check this race\"、\"prove this invariant\"、『形式化验证』『证明这个不变式』,或并发、重试、状态机、解析器、unsafe 代码光靠测试不够时使用。"
+  },
   "skills/create-verification-skill/SKILL.md": {
     "en": "Generate a project-local verification skill that drives your app the way a user does — any language, framework, or platform. Use for /create-verification-skill, \"make a control skill for this repo\", or when a project has no scripted way to prove UI/CLI/service behavior.",
     "zh": "生成一个项目内的验证技能,让代理像真实用户一样驱动你的应用,不限语言、框架或平台。当用户说 /create-verification-skill、'make a control skill for this repo'、『生成验证技能』『给这个仓库做个操控技能』,或项目没有任何脚本化手段来证明 UI/CLI/服务行为时使用。"
   },
   "skills/figure-it-out/SKILL.md": {
-    "en": "Design an auditable playbook when no narrower one fits: a large migration, an ambitious multi-part change, or work a human reviews after stepping away. Scales rigor to the task, runs a hypothesis loop, and logs decisions via show-me-your-work. Use for /figure-it-out, 'figure it out', a large migration, or when no narrower playbook applies.",
-    "zh": "当没有更窄的 playbook 适用时,为任务定制一套可审计的执行方案:大型迁移、宏大的多部分变更、或人离开之后再回来验收的工作。按任务规模调节严谨程度,运行假设循环,并通过 show-me-your-work 记录决策。当用户说 /figure-it-out、'figure it out'、『想办法搞定』『自己定一套方案』,或面对大型迁移、无现成 playbook 可套时使用。"
+    "en": "Design an auditable playbook when no narrower one fits: a large migration, an ambitious multi-part change, or work a human reviews after stepping away. Scales rigor to the task, runs a hypothesis loop, and logs decisions. Use for /figure-it-out or 'figure it out'.",
+    "zh": "当没有更窄的 playbook 适用时,为任务定制一套可审计的执行方案:大型迁移、宏大的多部分变更、或人离开之后再回来验收的工作。按任务规模调节严谨程度,运行假设循环,并记录决策。当用户说 /figure-it-out、'figure it out'、『想办法搞定』『自己定一套方案』时使用。"
   },
   "skills/how/SKILL.md": {
     "en": "Use for \"how does X work\", code walkthroughs before changing something, and placement / ownership / layering questions (\"where should this live\", \"which package owns this\", \"is this the right layer\"). Explains subsystem architecture, runtime flow, onboarding mental models. Use why for motivation.",
     "zh": "用于\"X 是怎么工作的\"、改代码前的代码走读,以及放置/归属/分层问题(\"这段该放在哪\"、\"哪个包拥有它\"、\"这一层对不对\")。讲解子系统架构、运行时流程、上手用的心智模型。问动机用 why。"
   },
+  "skills/in-your-own-words/SKILL.md": {
+    "en": "Restate in your own words what you think the user's goals are and what problem they're trying to solve. Use for /in-your-own-words.",
+    "zh": "用自己的话复述你理解的用户目标,以及他们想解决的问题。当用户说 /in-your-own-words、『复述一下我的需求』『说说你理解的目标』时使用。"
+  },
   "skills/interrogate/SKILL.md": {
-    "en": "Use for \"interrogate\", \"adversarial review\", \"multi-model review\", \"challenge this\", \"stress test this code\", \"find blind spots\", or \"tear this apart\". Multiple LLM reviewers challenge changes from independent angles.",
-    "zh": "多个 LLM 评审员从相互独立的角度挑战变更。当用户说 'interrogate'、'adversarial review'、'multi-model review'、'challenge this'、'stress test this code'、'find blind spots'、'tear this apart',或用中文说『对抗式评审』『多模型评审』『挑战这个方案』『找盲点』『往死里挑毛病』时使用。"
+    "en": "Use for \"interrogate\", \"adversarial review\", \"multi-model review\", \"challenge this\", \"stress test this code\", \"find blind spots\", or \"tear this apart\". Adversaries try to break a change or design, and only findings proven by a run survive.",
+    "zh": "当用户说 'interrogate'、'adversarial review'、'multi-model review'、'challenge this'、'stress test this code'、'find blind spots'、'tear this apart',或用中文说『对抗式评审』『多模型评审』『挑战这个方案』『找盲点』『往死里挑毛病』时使用。由对手设法攻破一项变更或设计,只有经实际运行证实的发现才会保留。"
+  },
+  "skills/ketchup-video/SKILL.md": {
+    "en": "Catch the user up like /ketchup, with a short subtitled video of slides for what happened and the waiting calls as text under it. Use for /ketchup-video.",
+    "zh": "像 /ketchup 一样帮用户追上进度,但用一段带字幕的幻灯片短视频讲清发生了什么,视频下方用文字列出等用户拍板的事项。当用户说 /ketchup-video、『用视频给我补一下进度』时使用。"
+  },
+  "skills/ketchup/SKILL.md": {
+    "en": "Catch the user up on what changed in this chat since their last message, in plain words and small visuals. List every item waiting on them with what they need to decide it from the reply alone. Use for /ketchup.",
+    "zh": "用大白话和小图示,帮用户追上自他上一条消息以来本次对话里的变化。列出每一项等用户决定的事,并附上仅凭这条回复就能做决定所需的信息。当用户说 /ketchup、『帮我补一下进度』『我错过了什么』时使用。"
+  },
+  "skills/maintain-formal-verification-skill/SKILL.md": {
+    "en": "Bring a project's formal verification back in line with the code after the code changes: find the commits that touched verified code, update the model, harness, or properties to describe the code as it is now, rerun, and say whether each failure is drift in the verification or a bug in the code. Use for /maintain-formal-verification-skill, \"is the model still true to the code\", or after merges and refactors that touched verified code without rechecking it.",
+    "zh": "代码改动之后,让项目的形式化验证重新与代码对齐:找出动过已验证代码的提交,更新模型、测试框架或性质,使其描述代码的现状,然后重跑,并判断每个失败是验证本身漂移了还是代码里有 bug。当用户说 /maintain-formal-verification-skill、\"is the model still true to the code\"、『模型还和代码一致吗』,或合并与重构动了已验证代码却没重新检查时使用。"
   },
   "skills/maintain-verification-skill/SKILL.md": {
     "en": "Periodic pass that keeps a project's verification skill and feature map honest: parallel source readers per feature, one live session driving every feature, at most one PR of proven corrections. Use for /maintain-verification-skill or \"audit the verify skill\".",
@@ -71,13 +99,17 @@
     "en": "Spawn Comment Sicko, fix accepted findings, and offer encodings for claimed constraints.",
     "zh": "派出 Comment Sicko 清剿注释,修复采纳的发现,并为注释里声称的约束提供结构化编码替代。当用户说 /no-comments、『清理注释』『把废话注释删掉』,或在提交评审前使用。"
   },
+  "skills/poteto-help/SKILL.md": {
+    "en": "Guides users through pstack setup, /poteto-mode, and picking the skill, playbook, or principle for a task. Type /poteto-help with a question.",
+    "zh": "引导用户完成 pstack 的设置、使用 /poteto-mode,以及为任务挑选合适的技能、playbook 或原则。输入 /poteto-help 加上你的问题,或用中文问『pstack 怎么用』『这个任务该用哪个技能』。"
+  },
   "skills/poteto-mode/SKILL.md": {
     "en": "poteto's agent style for concise, detailed responses, deliberate subagents, unslopped prose, simple code, and verified work. Use for poteto, /poteto-mode, or requests to work in this style.",
     "zh": "poteto 的代理风格:简洁而详实的回复、审慎的子代理使用、无 AI 腔的文字、简单的代码、验证过的工作。当用户说 poteto、/poteto-mode、『poteto 模式』『按 poteto 流程来』『用 poteto 风格干活』,或要求按这种风格工作时使用。"
   },
   "skills/principle-attack-the-premise/SKILL.md": {
-    "en": "Apply when two or more fixes that share one premise have failed the same gate. Take a census of which actors hold the imbalance before the next fix, then question the premise instead of writing another fix that assumes it.",
-    "zh": "适用于至少两个基于同一前提的修复都没通过同一道关卡时。在下一个修复之前,先清点不平衡落在哪些参与者身上,然后质疑前提本身,而不是再写一个默认它成立的修复。"
+    "en": "Apply when two or more fixes that share one premise have failed the same gate. Write the premise down and test it directly before you write another fix that assumes it.",
+    "zh": "适用于至少两个基于同一前提的修复都没通过同一道关卡时。在写下一个默认该前提成立的修复之前,先把前提写下来,直接检验它。"
   },
   "skills/principle-boundary-discipline/SKILL.md": {
     "en": "Apply when wiring validation, error handling, or framework adapters. Concentrate guards at system boundaries (CLI, config, network, external APIs); trust internal types and keep business logic in pure functions.",
@@ -99,9 +131,13 @@
     "en": "Apply when product, UX, or feature-scope tradeoffs come up. Choose user delight over implementation convenience; ship fewer polished features over more rough ones.",
     "zh": "适用于产品、UX 或功能范围出现取舍时。选择用户的愉悦而不是实现的省事;交付更少但打磨到位的功能,胜过更多但粗糙的功能。"
   },
+  "skills/principle-explain-the-number/SKILL.md": {
+    "en": "Apply before you measure, and before you trust, report, or act on a number you measured: a speedup, a regression, a throughput, a latency, or an eval result. Find what limits it, and rule out that it measured something other than the work you think.",
+    "zh": "适用于测量之前,以及信任、报告或依据一个自己测出的数字行动之前:提速、退化、吞吐、延迟或评测结果。找出限制这个数字的因素,并排除它测到的其实不是你以为的那份工作。"
+  },
   "skills/principle-fix-root-causes/SKILL.md": {
-    "en": "Apply when debugging. Trace each symptom to its root cause and fix it there; reproduce first, ask why until you reach it, resist nil-check guards that silence crashes.",
-    "zh": "适用于调试。把每个症状追溯到根因并在根因处修复;先复现,连问为什么直到触底,抵制用判空守卫把崩溃悄悄压掉的做法。"
+    "en": "Apply when debugging. Trace each symptom back to the first place the system went wrong and fix it there. A guard is a fix only when the state it handles is legitimate.",
+    "zh": "适用于调试。把每个症状追溯到系统最先出错的地方,并在那里修复。只有当守卫所处理的状态本身合法时,加守卫才算修复。"
   },
   "skills/principle-foundational-thinking/SKILL.md": {
     "en": "Apply before writing logic: choosing core types and data structures, sequencing scaffold-vs-feature work, asking what concurrent actors share. Get the data structures right so downstream code becomes obvious.",
@@ -128,12 +164,12 @@
     "zh": "适用于审查或整理难以追踪的代码时。数一数从问题到答案隔着几层、读者脑子里要记多少隐藏状态;折叠只有一个调用方的包装,收窄可变状态的作用域。"
   },
   "skills/principle-model-the-domain/SKILL.md": {
-    "en": "Apply when writing stateful logic, or when code branches a lot or repeats a shape assumption across files. Encode the domain in a structure instead of scattered conditionals.",
-    "zh": "适用于写有状态逻辑、代码大量分支、或同一形状假设在多个文件里重复出现时。把领域编码进一个结构,而不是散落的条件判断。"
+    "en": "Apply when writing stateful logic, or when code branches a lot or repeats a shape assumption across files.",
+    "zh": "适用于写有状态逻辑、代码大量分支、或同一形状假设在多个文件里重复出现时。"
   },
   "skills/principle-never-block-on-the-human/SKILL.md": {
-    "en": "Apply when tempted to ask 'should I do X?' on reversible work. Proceed, present the result, let the human course-correct after the fact; reserve confirmation for irreversible actions.",
-    "zh": "适用于在可逆工作上忍不住想问\"我该做 X 吗?\"时。直接做,呈现结果,让人事后纠偏;确认只留给不可逆操作。"
+    "en": "Apply when tempted to ask 'should I do X?' on reversible work.",
+    "zh": "适用于在可逆工作上忍不住想问\"我该做 X 吗?\"时。"
   },
   "skills/principle-outcome-oriented-execution/SKILL.md": {
     "en": "Apply during planned rewrites and migrations with explicit phase boundaries. Converge on the target architecture; don't preserve smooth intermediate states with throwaway compatibility code.",
@@ -144,8 +180,8 @@
     "zh": "适用于任务完成之后、宣布做完之前。对着真实产物验证(把功能跑起来、读实际的值、看 diff),而不是代理指标、自我汇报或\"能编译\"。"
   },
   "skills/principle-redesign-from-first-principles/SKILL.md": {
-    "en": "Apply when integrating a new requirement into an existing design. Redesign as if the requirement had been a foundational assumption from day one, instead of bolting it on.",
-    "zh": "适用于把新需求整合进既有设计时。当作这个需求从第一天起就是基础假设那样去重新设计,而不是往上焊补丁。"
+    "en": "Apply when integrating a new requirement into an existing design.",
+    "zh": "适用于把新需求整合进既有设计时。"
   },
   "skills/principle-separate-before-serializing-shared-state/SKILL.md": {
     "en": "Apply when concurrent actors might write to the same file, branch, key, or state object. Eliminate the sharing first; serialize structurally only when one shared writer is a real invariant.",
@@ -160,12 +196,12 @@
     "zh": "适用于安排新增、重构或重写的顺序时。先清掉死代码、冗余校验器和残留引用,再在更简单的基础上构建。"
   },
   "skills/principle-test-behavior-not-implementation/SKILL.md": {
-    "en": "Apply when you write, change, or keep a test. Call the code the way its users do and assert the result they observe against a literal expected value. If the test would still pass when every imported function returns undefined, rewrite the assertion or delete the test.",
-    "zh": "适用于编写、修改或保留一个测试时。像代码的使用方那样调用它,断言使用方观察到的结果等于一个字面量预期值。如果导入的每个函数都返回 undefined 而测试照样通过,就重写断言或删掉这个测试。"
+    "en": "Apply when you write, change, or keep a test. Assert what the code's users can observe, so that the test fails when that behavior breaks and keeps passing when only the internals change.",
+    "zh": "适用于编写、修改或保留一个测试时。断言代码使用方能观察到的结果,让测试在这种行为被破坏时失败,而在只改内部实现时继续通过。"
   },
   "skills/principle-type-system-discipline/SKILL.md": {
-    "en": "Apply when designing types, reviewing a function signature, or writing code in any statically-typed language. Make illegal states unrepresentable, brand semantic primitives, parse external data at boundaries, refuse to lie to the compiler, exhaust variants, derive from authoritative schemas.",
-    "zh": "适用于设计类型、审查函数签名、或在任何静态类型语言里写代码时。让非法状态无法表示、给语义化的原始类型打上品牌(brand)、在边界解析外部数据、拒绝对编译器撒谎、穷尽所有变体、从权威 schema 派生。"
+    "en": "Apply when designing types, reviewing a function signature, or writing code in any statically-typed language. Make illegal states unrepresentable, brand semantic primitives, parse external data at boundaries, exhaust variants, derive from authoritative schemas.",
+    "zh": "适用于设计类型、审查函数签名、或在任何静态类型语言里写代码时。让非法状态无法表示、给语义化的原始类型打上品牌(brand)、在边界解析外部数据、穷尽所有变体、从权威 schema 派生。"
   },
   "skills/recall/SKILL.md": {
     "en": "Reconstruct your recent working context from your own chat history, live state, and the shared record (user reports, prior fixes, incidents), then hand back a tight current-state brief. Use for 'recall my work on X', 'catch me up', 'what have I been working on', 'where did I leave off', before starting or resuming work.",
@@ -179,9 +215,17 @@
     "en": "Configure which models pstack uses per role and at what reasoning budget. Detects your available models and writes an always-applied rule that overrides the skill defaults. Use for /setup-pstack, \"configure pstack models\", \"pstack budget\", or changing pstack's model choices.",
     "zh": "配置 pstack 各角色使用的模型与推理预算。检测你可用的模型,并写入一条始终生效的规则来覆盖技能默认值。当用户说 /setup-pstack、'configure pstack models'、'pstack budget'、『配置 pstack 模型』『改 pstack 用的模型』『调 pstack 推理预算』时使用。"
   },
+  "skills/sharpen/SKILL.md": {
+    "en": "Make a task deeper, not bigger, then rewrite the prompt. Use for /sharpen.",
+    "zh": "把一个任务做深而不是做大,然后重写提示词。当用户说 /sharpen、『把需求磨尖』『帮我重写提示词』时使用。"
+  },
   "skills/show-me-your-work/SKILL.md": {
     "en": "Keep a reviewable decision trail for long-running or unattended work: a TSV log with one row per decision (what, why, evidence, result). Local by default; commit it when a reviewer needs the trail to trust the result. Use for /show-me-your-work, autonomous or multi-phase runs, or work a human reviews after stepping away.",
     "zh": "为长时间运行或无人值守的工作保留可审查的决策轨迹:一份 TSV 日志,每个决策一行(做了什么、为什么、证据、结果)。默认只留在本地;当评审者需要靠这份轨迹来信任结果时才提交。当用户说 /show-me-your-work、『留一份决策日志』『把工作过程摊开给我看』、进行自主或多阶段运行、或工作要等人回来复核时使用。"
+  },
+  "skills/statechart/SKILL.md": {
+    "en": "Check a TLA+ model of a system that moves between states, such as a product flow, a protocol, or a service, and draw it as a Mermaid statechart. The report gives the shortest path to each state that breaks a rule. Use for /statechart, or to show a bug as a path through states.",
+    "zh": "检查一个在多个状态之间流转的系统的 TLA+ 模型,例如产品流程、协议或服务,并把它画成 Mermaid 状态图。报告会给出到达每个违反规则状态的最短路径。当用户说 /statechart、『画状态图』,或要把一个 bug 表示成一条状态路径时使用。"
   },
   "skills/swarm/SKILL.md": {
     "en": "Fan out N parallel workers, drain them, and return one report. Use for /swarm, 'swarm this', or parallel coverage, races, gauntlets, and exploration.",
@@ -204,8 +248,8 @@
     "zh": "TypeScript 最佳实践。读取或编辑任何 .ts / .tsx 文件时使用。"
   },
   "skills/unslop/SKILL.md": {
-    "en": "Cut AI tells from any writing. Must always apply.",
-    "zh": "去除任何文字中的 AI 痕迹。必须始终应用。当用户说 unslop、『去 AI 味』『去掉 AI 腔』时也明确触发。"
+    "en": "Cut AI tells from any writing.",
+    "zh": "去除任何文字中的 AI 痕迹。当用户说 unslop、『去 AI 味』『去掉 AI 腔』时也明确触发。"
   },
   "skills/why/SKILL.md": {
     "en": "Use for 'why does X work this way', 'why we picked Y', design rationale, regressions, postmortems, or data-backed thresholds. Discovers available MCPs and queries each evidence category (source control, issue tracker, long-form docs, real-time chat, infrastructure observability, error tracking, product analytics warehouse) in parallel, then returns a cited read on decisions and tradeoffs. Use how for runtime behavior.",
