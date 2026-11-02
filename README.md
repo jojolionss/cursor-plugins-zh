@@ -82,11 +82,21 @@ python3 refresh_cursor_cache.py
 | automate-me | 把个人偏好与工作风格沉淀成 -mode 技能 |
 | setup-pstack | 配置 pstack 各角色用什么模型、多大的推理预算 |
 | typescript-best-practices | TypeScript 最佳实践,读写 .ts/.tsx 时生效 |
-| unslop | 去除文字里的 AI 腔,始终应用 |
+| unslop | 去除文字里的 AI 腔 |
 | bro | 把上一条消息用大白话重讲,『说人话』 |
 | no-comments | 评审前清剿注释,派 Comment Sicko 执行 |
 | technical-writing | 文档、RFC、PR 描述、commit message 的分层写作标准 |
 | make-bot-ui | 给 Grok Bot 做 webhook 页面/仪表盘 |
+| poteto-help | 问 pstack 怎么设置、某个任务该用哪个技能 |
+| correct | 把 agent 反复犯的错做成不可能再犯的检查 |
+| sharpen | 把任务做深而不是做大,再重写提示词 |
+| in-your-own-words | 用自己的话复述用户的目标和问题 |
+| ketchup | 帮用户追上本次对话的进度,列出待拍板事项 |
+| ketchup-video | 同 ketchup,但用带字幕的幻灯片短视频讲 |
+| benchmark-checklist | 报告或依据性能测量行动前逐项审查 |
+| statechart | 检查 TLA+ 模型并画成 Mermaid 状态图 |
+| create-formal-verification-skill | 为最难测的代码生成形式化验证技能 |
+| maintain-formal-verification-skill | 代码改动后让形式化验证重新对齐代码 |
 
 ### pstack 原则技能(principle-*)
 
@@ -115,12 +125,13 @@ python3 refresh_cursor_cache.py
 | guard-the-context-window | 守住上下文窗口,大块内容交给子代理 |
 | never-block-on-the-human | 可逆的事直接做,不停下来问 |
 | encode-lessons-in-structure | 把重复的教训固化成结构而非文字 |
+| explain-the-number | 信任或报告一个测出的数字前,先找出限制它的因素 |
 
 ### pstack 其他
 
 | 条目 | 一句话 |
 |---|---|
-| poteto-agent(子代理) | `/poteto-mode` 请求的路由目标 |
+| poteto-agent(子代理) | `/poteto-mode` 运行期间派出的委托子代理 |
 | comment-sicko(子代理) | 注释仇视者,由 no-comments 派出的执行体 |
 | benny 三个技能 | 随插件附带的自动化模板(分诊、复现修复、安装配置),不出现在技能选择器 |
 
